@@ -28,20 +28,24 @@ const Navbar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
+              className="menu menu-sm dropdown-content  z-[1] p-2 shadow   w-52"
             >
               {navLinks}
             </ul>
           </div>
-          <Link to="/">
-            <Logo />
-          </Link>
+          <div>
+            <Link to="/">
+              <Logo />
+            </Link>
+          </div>
         </div>
-        <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">{navLinks}</ul>
-        </div>
-        <div className="navbar-end">
-          <a className="btn">Button</a>
+        <div className="navbar-end justify-end">
+          <div className=" hidden lg:flex justify-end ">
+            <ul className="menu menu-horizontal px-1 ">{navLinks}</ul>
+          </div>
+          <div className="text-xl font-semibold text-teal-600">
+            <Link to="/login">Log In</Link>
+          </div>
         </div>
       </div>
     </nav>
