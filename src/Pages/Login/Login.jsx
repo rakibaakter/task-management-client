@@ -1,7 +1,53 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/login.png";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const Login = () => {
+  const { signIn } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.pathname || "/";
+
+  const handleLogin = (event) => {
+    event.preventDefault();
+    const form = event.target;
+    const email = form.email.value;
+    const password = form.password.value;
+    // console.log(email, password);
+
+    signIn(email, password)
+      .then((userCredential) => {
+        console.log(userCredential);
+        Swal.fire({
+          title: "user logged in ",
+          showClass: {
+            popup: `
+              animate__animated
+              animate__fadeInUp
+              animate__faster
+            `,
+          },
+          hideClass: {
+            popup: `
+              animate__animated
+              animate__fadeOutDown
+              animate__faster
+            `,
+          },
+        });
+        navigate(from, { replace: true });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      });
+  };
+
   return (
     <div className="pt-32">
       <div className="hero shadow-2xl w-4/5 mx-auto ">
@@ -11,7 +57,8 @@ const Login = () => {
           </div>
           <div className="card md:w-1/2">
             <h1 className="text-4xl font-bold text-center">Login now!</h1>
-            <form className="card-body">
+            <form onSubmit={handleLogin}
+            className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
