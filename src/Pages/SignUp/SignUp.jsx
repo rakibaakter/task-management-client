@@ -1,70 +1,81 @@
 import { useForm } from "react-hook-form";
 import loginImg from "../../assets/login.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
+  const { createUser, updateUser } = useAuth();
+  const axiosPublic = useAxiosPublic();
+  const navigate = useNavigate();
+  // const location = useLocation();
+
   const {
     register,
-    formState: { errors, reset },
+    formState: { errors },
     handleSubmit,
   } = useForm();
 
   const onSubmit = (data) => {
     console.log(data);
-    // createUser(data.email, data.password)
-    //   .then((userCredential) => {
-    //     console.log(userCredential);
-    //     updateUser(data.name, data.photoUrl)
-    //       .then((res) => {
-    //         const newUser = {
-    //           name: data.name,
-    //           email: data.email,
-    //         };
-    //         axiosPublic
-    //           .post("/users", newUser)
-    //           .then((res) => {
-    //             if (res.data.insertedId) {
-    //               console.log("added to database");
-    //               Swal.fire({
-    //                 title: "Sign Up Successfully",
-    //                 showClass: {
-    //                   popup: `
-    //                     animate__animated
-    //                     animate__fadeInUp
-    //                     animate__faster
-    //                   `,
-    //                 },
-    //                 hideClass: {
-    //                   popup: `
-    //                     animate__animated
-    //                     animate__fadeOutDown
-    //                     animate__faster
-    //                   `,
-    //                 },
-    //               });
-    //               navigate("/");
-    //             }
-    //           })
-    //           .catch((error) => {
-    //             Swal.fire({
-    //               icon: "error",
-    //               title: "Oops...",
-    //               text: error.message,
-    //             });
-    //           });
-    //       })
-    //       .catch((error) => {
-    //         console.log(error.message);
-    //       });
-    //   })
-    //   .catch((error) => {
-    //     Swal.fire({
-    //       icon: "error",
-    //       title: "Oops...",
-    //       text: error.message,
-    //     });
-    //   });
+    createUser(data.email, data.password)
+      .then((userCredential) => {
+        console.log(userCredential);
+        updateUser(data.name, data.photoUrl)
+          .then((res) => {
+            const newUser = {
+              name: data.name,
+              email: data.email,
+              photoUrl : data.photoUrl,
+              password : data.password
+            };
+            axiosPublic
+              .post("/users", newUser)
+              .then((res) => {
+                if (res.data.insertedId) {
+                  console.log("added to database");
+                  Swal.fire({
+                    title: "Sign Up Successfully",
+                    showClass: {
+                      popup: `
+                        animate__animated
+                        animate__fadeInUp
+                        animate__faster
+                      `,
+                    },
+                    hideClass: {
+                      popup: `
+                        animate__animated
+                        animate__fadeOutDown
+                        animate__faster
+                      `,
+                    },
+                  });
+                  navigate("/");
+                }
+              })
+              .catch((error) => {
+                Swal.fire({
+                  icon: "error",
+                  title: "Oops...",
+                  text: error.message,
+                });
+              });
+          })
+          .catch((error) => {
+            console.log(error.message);
+          });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      });
   };
+  
   return (
     <div className="pt-24">
       <div className="hero shadow-2xl w-4/5 mx-auto">
@@ -130,7 +141,7 @@ const SignUp = () => {
                     required: true,
                     minLength: 6,
                     pattern:
-                      /^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*\W)(?!.*$#)$/,
+                      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
                   })}
                 />
                 {errors.password?.type === "required" && (
