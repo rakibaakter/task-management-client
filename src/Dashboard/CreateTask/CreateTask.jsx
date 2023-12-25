@@ -83,7 +83,7 @@ const CreateTask = () => {
                 className="textarea textarea-bordered" placeholder="Description"></textarea>
               </div>
               <div className="flex flex-col md:flex-row gap-2">
-              <div className="form-control w-1/2">
+              <div className="form-control md:w-1/2">
                 <label className="label">
                   <span className="label-text">Deadline</span>
                 </label>
@@ -94,7 +94,7 @@ const CreateTask = () => {
                   {...register("deadline", { required: true })}
                 />
               </div>
-              <div className="form-control w-1/2">
+              <div className="form-control md:w-1/2">
                 <label className="label">
                   <span className="label-text">Priority</span>
                 </label>
