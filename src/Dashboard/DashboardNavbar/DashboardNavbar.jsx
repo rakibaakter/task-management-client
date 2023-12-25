@@ -70,7 +70,7 @@ const DashboardNavbar = () => {
       </li>
       <li>
         <NavLink
-          to="/"
+          to="/dashboard/to-do"
           className={({ isActive }) => (isActive ? "text-white" : "")}
         >
           to-do list
@@ -78,7 +78,7 @@ const DashboardNavbar = () => {
       </li>
       <li>
         <NavLink
-          to="/"
+          to="/dashboard/on-going"
           className={({ isActive }) => (isActive ? "text-white" : "")}
         >
           on-going list
@@ -86,7 +86,7 @@ const DashboardNavbar = () => {
       </li>
       <li>
         <NavLink
-          to="/dashboard/my-cart"
+          to="/dashboard/complete"
           className={({ isActive }) => (isActive ? "text-white" : "")}
         >
           
@@ -97,6 +97,15 @@ const DashboardNavbar = () => {
       <button onClick={handleLogOut} >
               Log Out
             </button>
+      </li>
+      <li>
+      <NavLink
+          to="/"
+          className={({ isActive }) => (isActive ? "text-white" : "")}
+        >
+          
+          Go Home
+        </NavLink>
       </li>
     </>
   );

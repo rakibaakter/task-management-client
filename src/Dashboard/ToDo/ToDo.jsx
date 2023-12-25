@@ -5,8 +5,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 import { RiEdit2Fill } from "react-icons/ri";
 
 
-
-const AllTask = () => {
+const ToDo = () => {
     const {user} = useAuth()
     const axiosPublic = useAxiosPublic()
     const [tasks, setTask] = useState([]);
@@ -16,18 +15,17 @@ useEffect(()=>{
     .then(res =>{
         const allData = res.data;
         // console.log(allData);
-        const userData = allData.filter(data=> data.email === user.email)
+        const userData = allData.filter(data=> data.email === user.email && data.status === "to-do")
         setTask(userData);
     })
     .catch(err =>{
         console.log(err.message);
     })
 }, [axiosPublic, user.email])
-// console.log(tasks);
 
     return (
         <div className="my-12">
-<h2 className="text-xl text-teal-600 bg-teal-200 py-2 font-bold"> All Tasks Together</h2>
+<h2 className="text-xl text-teal-600 bg-teal-200 py-2 font-bold"> To Do List</h2>
             <div>
             <div className="overflow-x-auto">
   <table className="table">
@@ -81,11 +79,8 @@ useEffect(()=>{
 </div>
             </div>
 
-            {/* <Link to="/dashboard/create-task">
-                <PrimaryBtn title="Add New Task" />
-            </Link> */}
         </div>
     );
 };
 
-export default AllTask;
+export default ToDo;
