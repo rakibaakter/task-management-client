@@ -39,8 +39,14 @@ const Navbar = () => {
 
   const navLinks = (
     <>
+    <li>
+      <a href="/">Home</a>
+    </li>
       <li>
-        <a>Item 1</a>
+      <a href="#feature">Features</a>
+      </li>
+      <li>
+      <a href="#canUse">Who Can Use It</a>
       </li>
       <li>
         <Link to="/dashboard">Dashboard</Link>
@@ -52,7 +58,7 @@ const Navbar = () => {
 
   return (
     <nav>
-      <div className="navbar bg-teal-50 fixed z-10 md:px-12 lg:px-36">
+      <div className="navbar bg-teal-50 fixed z-10 px-2 md:px-12 lg:px-36">
         <div className="navbar-start">
           <div className="dropdown">
             <div
