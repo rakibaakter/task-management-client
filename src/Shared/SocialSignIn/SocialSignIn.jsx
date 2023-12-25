@@ -16,6 +16,7 @@ const SocialSignIn = () => {
         const newUser = {
           email: result.user.email,
           name: result.user.displayName,
+          photoUrl : result.user.photoURL
         };
         console.log(newUser);
         axiosPublic

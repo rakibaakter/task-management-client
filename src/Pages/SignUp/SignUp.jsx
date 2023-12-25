@@ -29,7 +29,6 @@ const SignUp = () => {
               name: data.name,
               email: data.email,
               photoUrl : data.photoUrl,
-              password : data.password
             };
             axiosPublic
               .post("/users", newUser)
