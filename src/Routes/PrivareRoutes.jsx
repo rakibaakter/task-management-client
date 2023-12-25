@@ -5,6 +5,7 @@ import useAuth from "../Hooks/useAuth";
 const PrivateRoutes = ({ children }) => {
   const { user, loading } = useAuth();
   const location = useLocation();
+  // console.log(location);
 
   if (loading) {
     return (
@@ -18,13 +19,7 @@ const PrivateRoutes = ({ children }) => {
     return children;
   }
 
-  return (
-    <Navigate
-      to="/login"
-      state={{ from: location }}
-      replace
-    ></Navigate>
-  );
+  return <Navigate to="/login" state={location.pathname} replace></Navigate>;
 };
 
 export default PrivateRoutes;

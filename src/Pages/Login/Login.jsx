@@ -2,13 +2,16 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import loginImg from "../../assets/login.png";
 import useAuth from "../../Hooks/useAuth";
 import Swal from "sweetalert2";
+import SocialSignIn from "../../Shared/SocialSignIn/SocialSignIn";
 
 const Login = () => {
   const { signIn } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
 
-  const from = location.state?.pathname || "/";
+
+  // const from = location.state?.pathname || "/";
+  // console.log(from);
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -37,7 +40,7 @@ const Login = () => {
             `,
           },
         });
-        navigate(from, { replace: true });
+        navigate(location?.state ? location.state : "/dashboard");
       })
       .catch((error) => {
         Swal.fire({
@@ -98,6 +101,7 @@ const Login = () => {
                 </Link>
               </label>
             </form>
+            <SocialSignIn/>
           </div>
         </div>
       </div>

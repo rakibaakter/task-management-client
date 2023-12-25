@@ -1,24 +1,63 @@
-import { NavLink } from "react-router-dom";
-import {
-  FaBitbucket,
-  FaCalendar,
-  FaCreditCard,
-  FaHome,
-} from "react-icons/fa";
-import { FaBookBookmark, FaRankingStar } from "react-icons/fa6";
+import { Link, NavLink } from "react-router-dom";
 import { MdDashboard } from "react-icons/md";
+import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const DashboardNavbar = () => {
+  const { user, logOut } = useAuth();
+  const handleLogOut = () => {
+
+    logOut()
+      .then(() => {
+        Swal.fire({
+          title: "Sign Out Successfully",
+          showClass: {
+            popup: `
+                animate__animated
+                animate__fadeInUp
+                animate__faster
+              `,
+          },
+          hideClass: {
+            popup: `
+                animate__animated
+                animate__fadeOutDown
+                animate__faster
+              `,
+          },
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: error.message,
+        });
+      });
+  };
 
   const userNavItems = (
     <>
+    <li>
+      <ul>
+        <li>
+        <img
+                className="h-12 w-12 md:h-16 md:w-20 rounded-full"
+                src={user?.photoURL}
+                alt=""
+              />
+        </li>
+        <li><h2>{user.displayName}</h2></li>
+        <h3 className="normal-case">{user.email}</h3>
+      </ul>
+      <div className="divider"></div> 
+    </li>
       <li>
         <NavLink
-          to="/"
+          to="/dashboard"
           className={({ isActive }) => (isActive ? "text-white" : "")}
         >
-          <FaHome />
-          User Home
+          All
         </NavLink>
       </li>
       <li>
@@ -26,8 +65,7 @@ const DashboardNavbar = () => {
           to="/"
           className={({ isActive }) => (isActive ? "text-white" : "")}
         >
-          <FaCalendar />
-          Reservation
+          to do list
         </NavLink>
       </li>
       <li>
@@ -35,8 +73,7 @@ const DashboardNavbar = () => {
           to="/"
           className={({ isActive }) => (isActive ? "text-white" : "")}
         >
-          <FaCreditCard />
-          Payment History
+          ongoing list
         </NavLink>
       </li>
       <li>
@@ -44,27 +81,14 @@ const DashboardNavbar = () => {
           to="/dashboard/my-cart"
           className={({ isActive }) => (isActive ? "text-white" : "")}
         >
-          <FaBitbucket />
-          My Cart
+          
+          done list
         </NavLink>
       </li>
       <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) => (isActive ? "text-white" : "")}
-        >
-          <FaRankingStar />
-          Add Review
-        </NavLink>
-      </li>
-      <li>
-        <NavLink
-          to="/"
-          className={({ isActive }) => (isActive ? "text-white" : "")}
-        >
-          <FaBookBookmark />
-          My Booking
-        </NavLink>
+      <button onClick={handleLogOut} >
+              Log Out
+            </button>
       </li>
     </>
   );
@@ -88,6 +112,7 @@ const DashboardNavbar = () => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
+          
           <ul
             className="menu p-4 md:w-80 min-h-full
            bg-teal-600 text-white  font-medium uppercase"

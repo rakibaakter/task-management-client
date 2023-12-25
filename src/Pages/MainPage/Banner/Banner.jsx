@@ -1,8 +1,11 @@
 import { Link } from "react-router-dom";
 import bannerImg from "../../../assets/banner.png";
 import PrimaryBtn from "../../../Shared/Buttons/PrimaryBtn";
+import useAuth from "../../../Hooks/useAuth";
 
 const Banner = () => {
+  const {user} = useAuth()
+
   return (
     <div>
       <div className="hero bg-teal-50 lg:pt-20">
@@ -20,7 +23,7 @@ const Banner = () => {
               organized and accounted for, so you can make progress on the
               things that are important to you.
             </p>
-            <Link>
+            <Link to={user ? "/dashboard" : "/login"}>
               <PrimaryBtn title="let's Explore" />
             </Link>
           </div>

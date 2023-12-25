@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import SocialSignIn from "../../Shared/SocialSignIn/SocialSignIn";
 
 const SignUp = () => {
   const { createUser, updateUser } = useAuth();
@@ -173,7 +174,7 @@ const SignUp = () => {
                 </Link>
               </label>
             </form>
-            {/* <SocialSIgnIn /> */}
+            <SocialSignIn/>
           </div>
         </div>
       </div>
