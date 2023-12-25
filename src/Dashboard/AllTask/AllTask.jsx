@@ -30,7 +30,7 @@ useEffect(()=>{
 
     return (
         <div className="my-12">
-
+<h2 className="text-xl text-teal-600 bg-teal-200 py-2 font-bold"> Add New Task To Your List</h2>
             <div>
             <div className="overflow-x-auto">
   <table className="table">
@@ -84,9 +84,9 @@ useEffect(()=>{
 </div>
             </div>
 
-            <Link to="/dashboard/create-task">
+            {/* <Link to="/dashboard/create-task">
                 <PrimaryBtn title="Add New Task" />
-            </Link>
+            </Link> */}
         </div>
     );
 };

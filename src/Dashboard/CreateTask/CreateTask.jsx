@@ -47,7 +47,6 @@ const CreateTask = () => {
                   `,
                 },
               });
-              reset()
             }
           })
           .catch((error) => {

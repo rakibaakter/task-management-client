@@ -54,10 +54,18 @@ const DashboardNavbar = () => {
     </li>
       <li>
         <NavLink
+          to="/dashboard/create-task"
+          className={({ isActive }) => (isActive ? "text-white" : "")}
+        >
+          Add New Task
+        </NavLink>
+      </li>
+      <li>
+        <NavLink
           to="/dashboard"
           className={({ isActive }) => (isActive ? "text-white" : "")}
         >
-          All
+          All Task Together
         </NavLink>
       </li>
       <li>
@@ -65,7 +73,7 @@ const DashboardNavbar = () => {
           to="/"
           className={({ isActive }) => (isActive ? "text-white" : "")}
         >
-          to do list
+          to-do list
         </NavLink>
       </li>
       <li>
@@ -73,7 +81,7 @@ const DashboardNavbar = () => {
           to="/"
           className={({ isActive }) => (isActive ? "text-white" : "")}
         >
-          ongoing list
+          on-going list
         </NavLink>
       </li>
       <li>
