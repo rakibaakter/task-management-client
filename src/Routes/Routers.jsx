@@ -5,6 +5,8 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoutes from "./PrivareRoutes";
 import DashboardLayout from "../Dashboard/DashboardLayout/DashboardLayout";
+import AllTask from "../Dashboard/AllTask/AllTask";
+import CreateTask from "../Dashboard/CreateTask/CreateTask";
 
 const Routers = createBrowserRouter([
   {
@@ -32,6 +34,16 @@ const Routers = createBrowserRouter([
         <DashboardLayout />
       </PrivateRoutes>
     ),
+    children: [
+      {
+        path : "/dashboard",
+        element : <AllTask/>
+      },
+      {
+        path : "/dashboard/create-task",
+        element : <CreateTask/>
+      }
+    ]
    
   },
 ]);
