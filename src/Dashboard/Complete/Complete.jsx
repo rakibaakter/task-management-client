@@ -3,6 +3,7 @@ import useAxiosPublic from '../../Hooks/useAxiosPublic';
 import useAuth from '../../Hooks/useAuth';
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { RiEdit2Fill } from "react-icons/ri";
+import Swal from 'sweetalert2';
 
 
 const Complete = () => {
@@ -22,6 +23,39 @@ useEffect(()=>{
         console.log(err.message);
     })
 }, [axiosPublic, user.email])
+
+const handleDelete = (id) => {
+  console.log(id);
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!",
+  }).then((result) => {
+    if (result.isConfirmed) {
+      axiosPublic.delete(`/tasks/${id}`)
+      .then((res) => {
+        console.log(res);
+        if (res.data.deletedCount) {
+          Swal.fire({
+            title: "Deleted!",
+            text: "Your task has been deleted.",
+            icon: "success",
+          });
+          // const deletedData = tasks.find(task=> task._id === id);
+          const remainingData = tasks.filter(task=> task._id !== id);
+          setTask(remainingData)
+        }
+      })
+      .catch(err =>{
+        console.log(err.message);
+      })
+    }
+  });
+};
 
     return (
         <div className="my-12">
@@ -65,7 +99,7 @@ useEffect(()=>{
                 <th>
                     <div >
                     <button className="btn btn-ghost text-xl text-sky-500"><RiEdit2Fill /></button>
-                    <button className="btn btn-ghost text-xl text-red-600"><RiDeleteBin5Line /></button>
+                    <button onClick={()=>handleDelete(task._id)} className="btn btn-ghost text-xl text-red-600"><RiDeleteBin5Line /></button>
                     </div>
                   
                 </th>
