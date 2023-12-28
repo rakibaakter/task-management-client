@@ -4,27 +4,15 @@ import useAuth from '../../Hooks/useAuth';
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { RiEdit2Fill } from "react-icons/ri";
 import Swal from 'sweetalert2';
+import useTask from '../../Hooks/useTask';
 
 
 
 const AllTask = () => {
-    const {user} = useAuth()
-    const axiosPublic = useAxiosPublic()
-    const [tasks, setTask] = useState([]);
+    // const {user} = useAuth();
+    const [tasks] = useTask();
 
-useEffect(()=>{
-    axiosPublic.get('/tasks')
-    .then(res =>{
-        const allData = res.data;
-        // console.log(allData);
-        const userData = allData.filter(data=> data.email === user.email)
-        setTask(userData);
-    })
-    .catch(err =>{
-        console.log(err.message);
-    })
-}, [axiosPublic, user.email])
-// console.log(tasks);
+
 
 const handleDelete = (id) => {
   console.log(id);
