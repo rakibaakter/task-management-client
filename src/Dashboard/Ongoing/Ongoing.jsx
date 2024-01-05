@@ -1,48 +1,16 @@
-import { useEffect, useState } from 'react';
-import useAxiosPublic from '../../Hooks/useAxiosPublic';
-import useAuth from '../../Hooks/useAuth';
+
 import { RiDeleteBin5Line } from "react-icons/ri";
 import { RiEdit2Fill } from "react-icons/ri";
-import Swal from 'sweetalert2';
 import useTask from '../../Hooks/useTask';
+import useDeletion from '../../Hooks/useDeletion';
 
 
 const Ongoing = () => {
-    const {user} = useAuth()
-    const axiosPublic = useAxiosPublic()
-    const [tasks] = useTask();
+  const [tasks] = useTask();
+  const deleteItem = useDeletion();
 
 const handleDelete = (id) => {
-  console.log(id);
-  Swal.fire({
-    title: "Are you sure?",
-    text: "You won't be able to revert this!",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Yes, delete it!",
-  }).then((result) => {
-    if (result.isConfirmed) {
-      axiosPublic.delete(`/tasks/${id}`)
-      .then((res) => {
-        console.log(res);
-        if (res.data.deletedCount) {
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your task has been deleted.",
-            icon: "success",
-          });
-          // const deletedData = tasks.find(task=> task._id === id);
-          const remainingData = tasks.filter(task=> task._id !== id);
-          setTask(remainingData)
-        }
-      })
-      .catch(err =>{
-        console.log(err.message);
-      })
-    }
-  });
+deleteItem(id);
 };
 
     return (

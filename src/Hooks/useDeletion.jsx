@@ -4,8 +4,9 @@ import useTask from "./useTask";
 
 
 const useDeletion = (id) => {
-    const [tasks] = useTask()
-    const axiosPublic = useAxiosPublic()
+  const [tasks, refetch] = useTask()
+  const axiosPublic = useAxiosPublic()
+  const deleteItem = id=>{
     console.log(id);
     Swal.fire({
       title: "Are you sure?",
@@ -27,8 +28,9 @@ const useDeletion = (id) => {
               icon: "success",
             });
             // const deletedData = tasks.find(task=> task._id === id);
-            const remainingData = tasks.filter(task=> task._id !== id);
-            setTask(remainingData)
+            // const remainingData = tasks.filter(task=> task._id !== id);
+            // setTask(remainingData)
+            refetch()
           }
         })
         .catch(err =>{
@@ -36,6 +38,8 @@ const useDeletion = (id) => {
         })
       }
     });
+  }
+    return deleteItem;
 };
 
 export default useDeletion;
