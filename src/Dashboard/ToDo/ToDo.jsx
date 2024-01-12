@@ -6,7 +6,7 @@ import Task from '../Components/Task';
 const ToDo = () => {
     const [tasks] = useTask();
     const todoTasks = tasks.filter(task => task.status === "to-do");
-    console.log(todoTasks);
+    // console.log(todoTasks);
 
     return (
         <div className="my-12">

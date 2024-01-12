@@ -10,6 +10,7 @@ import CreateTask from "../Dashboard/CreateTask/CreateTask";
 import ToDo from "../Dashboard/ToDo/ToDo";
 import Ongoing from "../Dashboard/Ongoing/Ongoing";
 import Complete from "../Dashboard/Complete/Complete";
+import EditTask from "../Dashboard/EditTask/EditTask";
 
 const Routers = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const Routers = createBrowserRouter([
       {
         path : "/dashboard/create-task",
         element : <CreateTask/>
+      },
+      {
+        path : "/dashboard/edit-task/:id",
+        element : <EditTask/>
       },
       {
         path : "/dashboard/to-do",

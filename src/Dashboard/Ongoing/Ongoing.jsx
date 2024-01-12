@@ -1,6 +1,5 @@
 
 import useTask from '../../Hooks/useTask';
-import useDeletion from '../../Hooks/useDeletion';
 import Task from "../Components/Task";
 
 
